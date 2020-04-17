@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "750000513155",
-    "firebase_url": "https://inventory-management-sys-c2402.firebaseio.com",
-    "project_id": "inventory-management-sys-c2402",
-    "storage_bucket": "inventory-management-sys-c2402.appspot.com"
+    "project_number": "613626121512",
+    "firebase_url": "https://pantryio-osl.firebaseio.com",
+    "project_id": "pantryio-osl",
+    "storage_bucket": "pantryio-osl.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750000513155:android:2089dd13b17de333cebbb6",
+        "mobilesdk_app_id": "1:613626121512:android:4540950bc3b5a406b4541d",
         "android_client_info": {
-          "package_name": "com.example.hello_world"
+          "package_name": "com.example.pantryio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "750000513155-s8q9t156tiovqq9hua560dhpq31312ur.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.hello_world",
-            "certificate_hash": "d984be89cf2a10907acc0f0136e600658cf31b77"
-          }
-        },
-        {
-          "client_id": "750000513155-34rvjqnj63v38v1mqe1a6p5f6jukq6aq.apps.googleusercontent.com",
+          "client_id": "613626121512-ankjcpm12rem872f7g4rjob1h46eob60.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-pG_DhDfwrSqbTzo2hGOKs7oE1-pgvtI"
+          "current_key": "AIzaSyDJsWNAJXDoSbigF8Vom4L-f4ysFAJFUp8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "750000513155-34rvjqnj63v38v1mqe1a6p5f6jukq6aq.apps.googleusercontent.com",
+              "client_id": "613626121512-ankjcpm12rem872f7g4rjob1h46eob60.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -17,8 +17,8 @@ class CustPage extends StatelessWidget {
           children: <Widget>[
 //            header
             new UserAccountsDrawerHeader(
-              accountName: Text('Priyanshu'),
-              accountEmail: Text('pgupta@gmail.com'),
+              accountName: Text('Netra'),
+              accountEmail: Text('netraghaisas@gmail.com'),
               currentAccountPicture: GestureDetector(
                 child: new CircleAvatar(
                   backgroundColor: Colors.grey,
