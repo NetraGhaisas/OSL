@@ -3,7 +3,6 @@ import 'package:uuid/uuid.dart';
 
 class ProductService {
   Firestore _firestore = Firestore.instance;
-  
 
   void uploadProduct(
       {String uid,
@@ -30,7 +29,32 @@ class ProductService {
     });
   }
 
-  getproduct(String uid,String cate) {
+  void updateProduct(
+      {String uid,
+      String productId,
+      String productName,
+      String category,
+      int price,
+      int quantity,
+      String image,
+      String date,
+      int threshold}) {
+        print(uid);
+    String ref = 'users/' + uid + '/products';
+    
+    _firestore.collection(ref).document(productId).setData({
+      'name': productName,
+      'id': productId,
+      'category': category,
+      'quantity': quantity,
+      'price': price,
+      'picture': image,
+      'date': date,
+      'threshold': threshold,
+    });
+  }
+
+  getproduct(String uid, String cate) {
     String ref = 'users/' + uid + '/products';
     return _firestore
         .collection(ref)
@@ -38,11 +62,14 @@ class ProductService {
         .getDocuments();
   }
 
-  Future<List<DocumentSnapshot>> getAllProducts(String uid){
+  Future<List<DocumentSnapshot>> getAllProducts(String uid) {
     print(uid);
-      return _firestore.collection('users/'+uid+'/products').getDocuments().then((snaps){
-        print('SNAPS products $snaps');
-       return snaps.documents;
-     });
+    return _firestore
+        .collection('users/' + uid + '/products')
+        .getDocuments()
+        .then((snaps) {
+      print('SNAPS products $snaps');
+      return snaps.documents;
+    });
   }
 }
