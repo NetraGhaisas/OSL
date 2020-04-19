@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "613626121512",
+    "firebase_url": "https://pantryio-osl.firebaseio.com",
+    "project_id": "pantryio-osl",
+    "storage_bucket": "pantryio-osl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613626121512:android:4540950bc3b5a406b4541d",
+        "android_client_info": {
+          "package_name": "com.example.pantryio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613626121512-ankjcpm12rem872f7g4rjob1h46eob60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJsWNAJXDoSbigF8Vom4L-f4ysFAJFUp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613626121512-ankjcpm12rem872f7g4rjob1h46eob60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

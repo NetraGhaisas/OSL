@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/adminhome.dart';
 import 'package:hello_world/customer.dart';
+import 'package:hello_world/login_screen.dart';
+import 'package:hello_world/registerproduct.dart';
 import 'shopkeeper.dart';
 //import 'login.dart';
 import 'adminhome.dart';
@@ -14,20 +16,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Widgets Demo',
+      title: 'pantryio',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: Colors.orange,
+        
       ),
-      home: new HomePage(), 
+      home: new LoginScreen(), 
+      // initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        'Customer': (BuildContext context)=> CustPage(),
-        'Shopkeeper': (BuildContext context)=> Admin(),  
-        //'Admin': (BuildContext context)=> Admin(),
+        // '/customer': (BuildContext context)=> CustPage(),
+        '/admin': (BuildContext context)=> Admin(),  
+        '/home': (BuildContext context)=> HomePage(),
         //'Place Order': (BuildContext context)=> PlaceOrder(),
-      
+        '/addproduct': (BuildContext context)=> HomeMaterial(),
         //'Medical': (BuildContext context)=> MedicalLogin(),
-        //'Login': (BuildContext context)=> Login(),
+        '/login': (BuildContext context)=> LoginScreen(),
 //        'Medical Home': (BuildContext context)=> MedicalHome(),
 
       },

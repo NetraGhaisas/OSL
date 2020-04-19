@@ -13,8 +13,9 @@ import 'package:uuid/uuid.dart';
   
    }
 
-   Future<List<DocumentSnapshot>>getCategories()=>
+   Future<List<DocumentSnapshot>> getCategories()=>
       _firestore.collection(ref).getDocuments().then((snaps){
+        print('SNAPS $snaps');
        return snaps.documents;
      });
    

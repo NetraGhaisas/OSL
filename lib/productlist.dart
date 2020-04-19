@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hello_world/Pages/auth.dart';
 import 'product_view_details.dart';
 class ProductList extends StatefulWidget {
   @override
@@ -8,14 +9,13 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
   TextEditingController _searchTextController = TextEditingController();
-
  
  Future _data;
  Future getCat() async{
-
+  String uid = await Auth.getUID();
   var firestore = Firestore.instance;
 
-  QuerySnapshot qn = await firestore.collection('products').getDocuments();
+  QuerySnapshot qn = await firestore.collection('users/'+uid+'/products').getDocuments();
    return qn.documents;
  }
 
@@ -58,7 +58,7 @@ class _ProductListState extends State<ProductList> {
         builder: (_,snapshot){
           if(snapshot.connectionState==ConnectionState.waiting){
             return Center(
-              child: Text("Loading....."),
+              child: CircularProgressIndicator(),
             );
           }
           else
@@ -93,10 +93,11 @@ class _ProductListState extends State<ProductList> {
                   ),
 
                   footer: Container(
-              color: Colors.white,     
+              color: Colors.white, 
+                  
               child: ListTile(
                 title: Text(snapshot.data[index].data['name'], style:TextStyle(fontWeight: FontWeight.bold)),
-                trailing: Text(snapshot.data[index].data['price'].toString(), style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800,),),
+                trailing: Text(snapshot.data[index].data['quantity'].toString()+' units left', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800,),),
               )
                   ),
               

@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hello_world/Pages/auth.dart';
 import 'db/category.dart';
 import 'db/product.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
 enum Page { Camera, Gallery }
 
 
@@ -21,18 +23,21 @@ class _HomeMaterialState extends State {
   TextEditingController _productNameController = TextEditingController();
   TextEditingController _productPriceController = TextEditingController();
   TextEditingController _productQuantityController = TextEditingController();
+  TextEditingController _productThresholdController = TextEditingController();
   List<DocumentSnapshot> categories = <DocumentSnapshot>[];
   List<DropdownMenuItem<String>> categoriesDropDown= <DropdownMenuItem<String>>[];
-   MaterialColor active = Colors.red;
+   MaterialColor active = Colors.orange;
   MaterialColor notActive = Colors.grey;
   String _currentCategory = "test";
   bool typeFlag = false;
   File _image1;
   bool isLoading = false;
+  String _uid;
   
   @override
   void initState(){
     _getCategories();
+    _getUID();
   }
     
   
@@ -223,6 +228,20 @@ class _HomeMaterialState extends State {
                         }
                       },
                     ),
+                  ), 
+
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: TextFormField(
+                      controller: _productThresholdController,
+                      keyboardType: TextInputType.numberWithOptions(),
+                      decoration:InputDecoration(labelText: 'Minimum quantity required'),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter minimum threshold';
+                        }
+                      },
+                    ),
                   ),           
                        
                   FlatButton(
@@ -270,6 +289,14 @@ class _HomeMaterialState extends State {
       _currentCategory = categories[0].data['category'];
     });
   }
+
+  _getUID() async {
+    var data = await Auth.getUID();
+    print(data.toString());
+    setState(() {
+      _uid = data.toString(); 
+    });
+  }
                                                           
   void changeSelectedCategory(String selectedCategory) 
   {
@@ -286,7 +313,7 @@ class _HomeMaterialState extends State {
         final String picture1 = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
         StorageUploadTask task1 =  storage.ref().child(picture1).putFile(_image1);
         StorageTaskSnapshot snapshot1 = await task1.onComplete.then((snapshot)=>snapshot);
-         
+        final String datetime = DateFormat("dd-MM-yyyy hh:mm:ss").format(DateTime.now());
         task1.onComplete.then((snapshot1) async{
 
           imageUrl1 = await snapshot1.ref.getDownloadURL();
@@ -296,7 +323,10 @@ class _HomeMaterialState extends State {
             category: _currentCategory,
             price: int.parse(_productPriceController.text),
             quantity: int.parse(_productQuantityController.text), 
-            image: imageUrl1 
+            image: imageUrl1,
+            date: datetime,
+            threshold: int.parse(_productThresholdController.text),
+            uid: _uid,
           );
           _formKey.currentState.reset();
       

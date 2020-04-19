@@ -55,7 +55,7 @@ class _ProductCategoriesState extends State<ProductCategories> {
         builder: (_,snapshot){
           if(snapshot.connectionState==ConnectionState.waiting){
             return Center(
-              child: Text("Loading....."),
+              child: CircularProgressIndicator(),
             );
           }
           else
