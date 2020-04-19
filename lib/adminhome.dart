@@ -87,9 +87,8 @@ class _AdminState extends State<Admin> {
     switch (_selectedPage) {
       case Page.dashboard:
         return Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            
-
             // ListTile(
             //   subtitle: FlatButton.icon(
             //     onPressed: null,
@@ -235,9 +234,16 @@ class _AdminState extends State<Admin> {
                 ],
               ),
             ),
-            Expanded(child: Padding(padding:EdgeInsets.all(10.0),child:Card(child: ListTile(title:Text('hello'),)))),
+            Expanded(
+              child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Card(
+                      child: ListTile(
+                    title: Text('hello'),
+                  ))),
+            ),
             FlatButton.icon(
-              onPressed: ()=>_logOut(context),
+              onPressed: () => _logOut(context),
               icon: Icon(Icons.exit_to_app),
               label: Text('Log Out'),
               color: active,
@@ -291,41 +297,41 @@ class _AdminState extends State<Admin> {
     }
   }
 
-  void _categoryAlert() {
-    var alert = new AlertDialog(
-      content: Form(
-        key: _categoryFormKey,
-        child: TextFormField(
-          controller: categoryController,
-          validator: (value) {
-            if (value.isEmpty) {
-              return 'category cannot be empty';
-            }
-          },
-          decoration: InputDecoration(hintText: "add category"),
-        ),
-      ),
-      actions: <Widget>[
-        FlatButton(
-            onPressed: () {
-              if (categoryController.text != null) {
-                _categoryService.createCategory(categoryController.text);
-                print('yay');
-              }
-              Fluttertoast.showToast(msg: 'category created');
-              Navigator.pop(context);
-            },
-            child: Text('ADD')),
-        FlatButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('CANCEL')),
-      ],
-    );
+  // void _categoryAlert() {
+  //   var alert = new AlertDialog(
+  //     content: Form(
+  //       key: _categoryFormKey,
+  //       child: TextFormField(
+  //         controller: categoryController,
+  //         validator: (value) {
+  //           if (value.isEmpty) {
+  //             return 'category cannot be empty';
+  //           }
+  //         },
+  //         decoration: InputDecoration(hintText: "add category"),
+  //       ),
+  //     ),
+  //     actions: <Widget>[
+  //       FlatButton(
+  //           onPressed: () {
+  //             if (categoryController.text != null) {
+  //               _categoryService.createCategory(categoryController.text);
+  //               print('yay');
+  //             }
+  //             Fluttertoast.showToast(msg: 'category created');
+  //             Navigator.pop(context);
+  //           },
+  //           child: Text('ADD')),
+  //       FlatButton(
+  //           onPressed: () {
+  //             Navigator.pop(context);
+  //           },
+  //           child: Text('CANCEL')),
+  //     ],
+  //   );
 
-    showDialog(context: context, builder: (_) => alert);
-  }
+  //   showDialog(context: context, builder: (_) => alert);
+  // }
 
   _getCategories() async {
     List<DocumentSnapshot> catList = await _categoryService.getCategories();
