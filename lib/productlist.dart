@@ -12,6 +12,7 @@ class _ProductListState extends State<ProductList> {
   TextEditingController _searchTextController = TextEditingController();
   String uid;
   Future _data;
+
   Future getCat() async {
     uid = await Auth.getUID();
     var firestore = Firestore.instance;
@@ -111,9 +112,15 @@ class _ProductListState extends State<ProductList> {
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                       trailing: Text(
-                                        snapshot.data[index].data['quantity']
-                                                .toString() +
-                                            ' units left',
+                                        ((snapshot.data[index]
+                                                    .data['refillNeeded'] ==
+                                                true)
+                                            ? 'Refill needed! '
+                                            : '') +
+                                                snapshot.data[index]
+                                                    .data['quantity']
+                                                    .toString() +
+                                                ' units left',
                                         style: TextStyle(
                                           color: Colors.red,
                                           fontWeight: FontWeight.w800,

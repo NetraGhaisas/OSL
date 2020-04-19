@@ -16,7 +16,7 @@ class ProductService {
     var id = Uuid();
     String productId = id.v1();
     String ref = 'users/' + uid + '/products';
-
+    bool refill = (quantity - threshold <= 0) ? true : false;
     _firestore.collection(ref).document(productId).setData({
       'name': productName,
       'id': productId,
@@ -26,6 +26,7 @@ class ProductService {
       'picture': image,
       'date': date,
       'threshold': threshold,
+      'refillNeeded': refill,
     });
   }
 
@@ -39,9 +40,10 @@ class ProductService {
       String image,
       String date,
       int threshold}) {
-        print(uid);
+    print(uid);
     String ref = 'users/' + uid + '/products';
-    
+
+    bool refill = (quantity - threshold <= 0) ? true : false;
     _firestore.collection(ref).document(productId).setData({
       'name': productName,
       'id': productId,
@@ -51,6 +53,7 @@ class ProductService {
       'picture': image,
       'date': date,
       'threshold': threshold,
+      'refillNeeded': refill,
     });
   }
 
@@ -69,6 +72,17 @@ class ProductService {
         .getDocuments()
         .then((snaps) {
       print('SNAPS products $snaps');
+      return snaps.documents;
+    });
+  }
+
+  Future<List<DocumentSnapshot>> getRefillProducts(String uid) {
+    return _firestore
+        .collection('users/' + uid + '/products')
+        .where('refillNeeded', isEqualTo: true)
+        .getDocuments()
+        .then((snaps) {
+      print('SNAPS refills $snaps');
       return snaps.documents;
     });
   }

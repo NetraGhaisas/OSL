@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hello_world/Pages/auth.dart';
 import 'package:hello_world/db/product.dart';
+import 'package:hello_world/product_view_details.dart';
 import 'package:hello_world/productlist.dart';
 import 'db/category.dart';
 import 'registerproduct.dart';
@@ -236,13 +237,14 @@ class _AdminState extends State<Admin> {
             ),
             Expanded(
               child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Card(
-                      child: ListTile(
-                    title: Text('hello'),
-                  ))),
+                padding: EdgeInsets.all(10.0),
+                child: Card(
+                  child: RefillList(),
+                ),
+              ),
             ),
             FlatButton.icon(
+              padding: EdgeInsets.symmetric(horizontal: 50),
               onPressed: () => _logOut(context),
               icon: Icon(Icons.exit_to_app),
               label: Text('Log Out'),
@@ -366,4 +368,113 @@ class _AdminState extends State<Admin> {
   //     uid = data.toString();
   //   });
   // }
+}
+
+class RefillList extends StatefulWidget {
+  @override
+  _RefillListState createState() => _RefillListState();
+}
+
+class _RefillListState extends State<RefillList> {
+  String uid;
+  Future _data;
+
+  Future getRefill() async {
+    uid = await Auth.getUID();
+    // var firestore = Firestore.instance;
+    ProductService ps = ProductService();
+    return ps.getRefillProducts(uid);
+    // QuerySnapshot qn =
+    //     await firestore.collection('users/' + uid + '/products').getDocuments();
+    // return qn.documents;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _data = getRefill();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: FutureBuilder(
+            future: _data,
+            builder: (_, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                if (snapshot.data.length == 0)
+                  return Container(
+                      child: Center(
+                    child: Text('No items to refill'),
+                  ));
+                else
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10.0),
+                          child: InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          new ProductViewDetail(
+                                            //passing the values of product grid view to product view details
+                                            product_detail_id:
+                                                snapshot.data[index].data['id'],
+                                            product_detail_name: snapshot
+                                                .data[index].data['name'],
+                                            product_detail_price: snapshot
+                                                .data[index].data['price'],
+                                            product_detail_picture: snapshot
+                                                .data[index].data['picture'],
+                                            product_detail_quantity: snapshot
+                                                .data[index].data['quantity'],
+                                            product_detail_date: snapshot
+                                                .data[index].data['date'],
+                                            product_detail_category: snapshot
+                                                .data[index].data['category'],
+                                            product_detail_threshold: snapshot
+                                                .data[index].data['threshold'],
+                                          ))),
+                              child: Container(
+                                height: 150.0,
+                                child: GridTile(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10.0),
+                                    color: Colors.orange[50],
+                                    //child: Image.asset('images/c3.jpg'),
+                                    child: Image.network(
+                                        snapshot.data[index].data['picture']),
+                                  ),
+                                  footer: Container(
+                                      color: Colors.orange[50],
+                                      child: ListTile(
+                                        title: Text(
+                                            snapshot.data[index].data['name'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                        trailing: Text('Refill needed! '+
+                                          snapshot.data[index].data['quantity']
+                                                  .toString() +
+                                              ' units left',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        ),
+                                      )),
+                                ),
+                              )),
+                        );
+                      });
+              }
+            }));
+  }
 }
