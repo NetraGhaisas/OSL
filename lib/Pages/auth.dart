@@ -60,14 +60,15 @@ class Auth implements BaseAuth {
       AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      Map usermap = {
-        "uid": user.uid,
-        "email": email,
-      };
-      await createUser(usermap);
+      // Map usermap = {
+      //   "uid": user.uid,
+      //   "email": email,
+      // };
+      this.makeUser(user.uid, email);
       await _storeUID(user.uid);
       print('store uid done');
     } catch (pe) {
+      print(pe.toString());
       return 'Invalid credentials';
     }
     return null;
@@ -96,15 +97,16 @@ class Auth implements BaseAuth {
     return uidString;
   }
 
-  void createUser(Map data) async {
+  void makeUser(uid, email) async {
     String collection = "users";
     String subcollection = "products";
-    _firestore.collection(collection).document(data["uid"]).setData(data);
-    _firestore
-        .collection(collection)
-        .document(data["uid"])
-        .collection(subcollection)
-        .document("0")
-        .setData({});
+    Map data = {
+      "uid": uid,
+      "email": email,
+    };
+    _firestore.collection(collection).document(uid).setData({
+      "uid": uid,
+      "email": email,
+    });
   }
 }

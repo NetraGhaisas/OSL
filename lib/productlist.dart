@@ -72,7 +72,7 @@ class _ProductListState extends State<ProductList> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 10.0),
-                        child: InkWell(
+                        child: snapshot.data[index].data['id']==0?Container():InkWell(
                             onTap: () =>
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => new ProductViewDetail(
@@ -101,7 +101,7 @@ class _ProductListState extends State<ProductList> {
                                   padding: EdgeInsets.all(10.0),
                                   color: Colors.orange[50],
                                   //child: Image.asset('images/c3.jpg'),
-                                  child: Image.network(
+                                  child: snapshot.data[index].data['picture']==null?Icon(Icons.image):Image.network(
                                       snapshot.data[index].data['picture']),
                                 ),
                                 footer: Container(

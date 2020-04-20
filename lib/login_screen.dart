@@ -76,7 +76,7 @@ class LoginScreenState extends State<LoginScreen> {
         print('Signup info');
         print('email: ${loginData.name.trim()}');
         print('password: ${loginData.password}');
-        var uid = auth.register(loginData.name.trim(),loginData.password);
+        var uid = await auth.register(loginData.name.trim(),loginData.password);
         // await _storeUID(uid);
         return uid;
       },

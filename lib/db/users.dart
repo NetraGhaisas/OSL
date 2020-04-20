@@ -4,8 +4,11 @@ class UserServices{
   String collection = "users"; 
   String subcollection = "products";
 
-  void createUser(Map data){
-    _firestore.collection(collection).document(data["uid"]).setData(data);
-    _firestore.collection(collection).document(data["uid"]).collection(subcollection).document("0").setData({});
+  void createUser(data){
+    print('heyo');
+    _firestore.collection(collection).document(data['uid']).setData(data);
+    print('done1');
+    _firestore.collection(collection).document(data['uid']).collection(subcollection).document("0").setData({});
+    print('done2');
   }
 }
