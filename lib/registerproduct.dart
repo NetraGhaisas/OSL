@@ -341,7 +341,7 @@ class _HomeMaterialState extends State {
       else
       {
         setState(() =>isLoading = false);
-        Fluttertoast.showToast(msg: 'at least one images must be provided');
+        Fluttertoast.showToast(msg: 'At least one image must be provided');
       }
     }
   

@@ -83,6 +83,8 @@ class _NextPageState extends State<NextPage> {
                                               .data[index].data['category'],
                                           product_detail_threshold: snapshot
                                               .data[index].data['threshold'],
+                                          product_detail_refill: snapshot
+                                              .data[index].data['refillNeeded'],
                                         ))),
                             child: Container(
                               height: 150.0,
@@ -115,55 +117,6 @@ class _NextPageState extends State<NextPage> {
                             )),
                       );
                     });
-                // return ListView.builder(
-                //     itemCount: snapshot.data.length,
-                //     shrinkWrap: true,
-                //     itemBuilder: (_, index) {
-                //       return Padding(
-                //           padding: const EdgeInsets.symmetric(
-                //               horizontal: 10.0, vertical: 10.0),
-                //           child: InkWell(
-                //               onTap: () => Navigator.of(context).push(
-                //                   MaterialPageRoute(
-                //                       builder: (context) =>
-                //                           new ProductViewDetail(
-                //                             //passing the values of product grid view to product view details
-                //                             product_detail_name: snapshot
-                //                                 .data[index].data['name'],
-                //                             product_detail_price: snapshot
-                //                                 .data[index].data['price'],
-                //                             product_detail_picture: snapshot
-                //                                 .data[index].data['picture'],
-                //                             product_detail_quantity: snapshot
-                //                                 .data[index].data['quantity'],
-                //                           ))),
-                //               child: Container(
-                //                 height: 150.0,
-                //                 child: GridTile(
-                //                   child: Container(
-                //                     color: Colors.white,
-                //                     child: Image.network(
-                //                         snapshot.data[index].data['picture']),
-                //                   ),
-                //                   footer: Container(
-                //                       color: Colors.white,
-                //                       child: ListTile(
-                //                         title: Text(
-                //                             snapshot.data[index].data['name'],
-                //                             style: TextStyle(
-                //                                 fontWeight: FontWeight.bold)),
-                //                         trailing: Text(
-                //                           snapshot.data[index].data['price']
-                //                               .toString(),
-                //                           style: TextStyle(
-                //                             color: Colors.red,
-                //                             fontWeight: FontWeight.w800,
-                //                           ),
-                //                         ),
-                //                       )),
-                //                 ),
-                //               )));
-                //     });
               }
             }));
   }

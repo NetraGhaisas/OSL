@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/adminhome.dart';
-import 'package:hello_world/customer.dart';
+// import 'package:hello_world/customer.dart';
 import 'package:hello_world/login_screen.dart';
 import 'package:hello_world/registerproduct.dart';
-import 'shopkeeper.dart';
+// import 'shopkeeper.dart';
 //import 'login.dart';
 import 'adminhome.dart';
-import 'placeorder.dart';
+// import 'placeorder.dart';
 
 void main(){ 
   runApp(new MyApp());
