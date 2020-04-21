@@ -72,63 +72,74 @@ class _ProductListState extends State<ProductList> {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 10.0),
-                        child: snapshot.data[index].data['id']==0?Container():InkWell(
-                            onTap: () =>
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => new ProductViewDetail(
-                                          //passing the values of product grid view to product view details
-                                          product_detail_id:
-                                              snapshot.data[index].data['id'],
-                                          product_detail_name:
-                                              snapshot.data[index].data['name'],
-                                          product_detail_price: snapshot
-                                              .data[index].data['price'],
-                                          product_detail_picture: snapshot
-                                              .data[index].data['picture'],
-                                          product_detail_quantity: snapshot
-                                              .data[index].data['quantity'],
-                                          product_detail_date:
-                                              snapshot.data[index].data['date'],
-                                          product_detail_category: snapshot
-                                              .data[index].data['category'],
-                                          product_detail_threshold: snapshot
-                                              .data[index].data['threshold'],
-                                        ))),
-                            child: Container(
-                              height: 150.0,
-                              child: GridTile(
+                        child: snapshot.data[index].data['id'] == 0
+                            ? Container()
+                            : InkWell(
+                                onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            new ProductViewDetail(
+                                              //passing the values of product grid view to product view details
+                                              product_detail_id: snapshot
+                                                  .data[index].data['id'],
+                                              product_detail_name: snapshot
+                                                  .data[index].data['name'],
+                                              product_detail_price: snapshot
+                                                  .data[index].data['price'],
+                                              product_detail_picture: snapshot
+                                                  .data[index].data['picture'],
+                                              product_detail_quantity: snapshot
+                                                  .data[index].data['quantity'],
+                                              product_detail_date: snapshot
+                                                  .data[index].data['date'],
+                                              product_detail_category: snapshot
+                                                  .data[index].data['category'],
+                                              product_detail_threshold: snapshot
+                                                  .data[index]
+                                                  .data['threshold'],
+                                              product_detail_refill: snapshot
+                                                  .data[index]
+                                                  .data['refillNeeded'],
+                                            ))),
                                 child: Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  color: Colors.orange[50],
-                                  //child: Image.asset('images/c3.jpg'),
-                                  child: snapshot.data[index].data['picture']==null?Icon(Icons.image):Image.network(
-                                      snapshot.data[index].data['picture']),
-                                ),
-                                footer: Container(
-                                    color: Colors.orange[50],
-                                    child: ListTile(
-                                      title: Text(
-                                          snapshot.data[index].data['name'],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      trailing: Text(
-                                        ((snapshot.data[index]
-                                                    .data['refillNeeded'] ==
-                                                true)
-                                            ? 'Refill needed! '
-                                            : '') +
+                                  height: 150.0,
+                                  child: GridTile(
+                                    child: Container(
+                                      padding: EdgeInsets.all(10.0),
+                                      color: Colors.orange[50],
+                                      //child: Image.asset('images/c3.jpg'),
+                                      child: snapshot.data[index]
+                                                  .data['picture'] ==
+                                              null
+                                          ? Icon(Icons.image)
+                                          : Image.network(snapshot
+                                              .data[index].data['picture']),
+                                    ),
+                                    footer: Container(
+                                        color: Colors.orange[50],
+                                        child: ListTile(
+                                          title: Text(
+                                              snapshot.data[index].data['name'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                          trailing: Text(
+                                            ((snapshot.data[index].data[
+                                                            'refillNeeded'] ==
+                                                        true)
+                                                    ? 'Refill needed! '
+                                                    : '') +
                                                 snapshot.data[index]
                                                     .data['quantity']
                                                     .toString() +
                                                 ' units left',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.w800,
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                            )),
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                        )),
+                                  ),
+                                )),
                       );
                     });
               }

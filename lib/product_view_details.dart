@@ -20,6 +20,7 @@ class ProductViewDetail extends StatefulWidget {
   String product_detail_date;
   final product_detail_threshold;
   final product_detail_category;
+  final bool product_detail_refill;
   final _quantityController = TextEditingController();
 
   ProductViewDetail({
@@ -31,6 +32,7 @@ class ProductViewDetail extends StatefulWidget {
     this.product_detail_date,
     this.product_detail_threshold,
     this.product_detail_category,
+    this.product_detail_refill,
   });
   @override
   _ProductViewDetailState createState() => _ProductViewDetailState();
@@ -127,6 +129,11 @@ class _ProductViewDetailState extends State<ProductViewDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+                                if(widget.product_detail_refill) Text('Refill needed!',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0)),
                                 Row(
                                   children: <Widget>[
                                     Text(
@@ -162,7 +169,9 @@ class _ProductViewDetailState extends State<ProductViewDetail> {
                                   ],
                                 ),
                                 InkWell(
-                                  onTap: () {_quantityAlert();},
+                                  onTap: () {
+                                    _quantityAlert();
+                                  },
                                   child: Row(
                                     children: <Widget>[
                                       Text(
@@ -185,6 +194,24 @@ class _ProductViewDetailState extends State<ProductViewDetail> {
                                           color: Colors.black45, size: 20.0),
                                     ],
                                   ),
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      'Minimum requirement: ',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0),
+                                    ),
+                                    Text(
+                                      widget.product_detail_threshold
+                                          .toString(),
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.orange, fontSize: 18.0),
+                                    ),
+                                  ],
                                 ),
                               ],
                             )),
@@ -262,6 +289,13 @@ class _ProductViewDetailState extends State<ProductViewDetail> {
                         // ),
 
                         Divider(),
+                        FlatButton.icon(
+                          onPressed: _deleteProduct,
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete item'),
+                          color: Colors.red,
+                          textColor: Colors.white,
+                        ),
                         // ButtonBar(
                         //   alignment: MainAxisAlignment.spaceEvenly,
                         //   children: <Widget>[
@@ -309,6 +343,20 @@ class _ProductViewDetailState extends State<ProductViewDetail> {
     );
   }
 
+  _deleteProduct() async {
+    String productName = widget.product_detail_name;
+    uid = await Auth.getUID();
+    bool success = _productService.deleteProduct(uid, widget.product_detail_id);
+    if (success) {
+      Fluttertoast.showToast(msg: 'Deleted product ' + productName);
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Error deleting product ' + productName,
+          backgroundColor: Colors.red);
+    }
+    Navigator.of(context).pop();
+  }
+
   void _quantityAlert() {
     var alert = new AlertDialog(
       content: Form(
@@ -331,7 +379,8 @@ class _ProductViewDetailState extends State<ProductViewDetail> {
                 setState(() {
                   widget.product_detail_quantity =
                       int.parse(_quantityController.text);
-                  widget.product_detail_date = DateFormat("dd-MM-yyyy hh:mm:ss").format(DateTime.now());
+                  widget.product_detail_date =
+                      DateFormat("dd-MM-yyyy hh:mm:ss").format(DateTime.now());
                 });
                 _updateProduct();
                 // _categoryService.createCategory(categoryController.text);

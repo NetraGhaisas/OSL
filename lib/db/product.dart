@@ -67,6 +67,7 @@ class ProductService {
 
   Future<List<DocumentSnapshot>> getAllProducts(String uid) {
     print(uid);
+
     return _firestore
         .collection('users/' + uid + '/products')
         .getDocuments()
@@ -85,5 +86,14 @@ class ProductService {
       print('SNAPS refills $snaps');
       return snaps.documents;
     });
+  }
+
+  deleteProduct(uid, productId) {
+    String ref = 'users/' + uid + '/products';
+    _firestore.collection(ref).document(productId).delete().catchError((e) {
+      print(e.toString());
+      return false;
+    });
+    return true;
   }
 }
