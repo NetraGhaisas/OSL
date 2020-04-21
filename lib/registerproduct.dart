@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hello_world/Pages/auth.dart';
+import 'package:pantryio/Pages/auth.dart';
 import 'db/category.dart';
 import 'db/product.dart';
 import 'package:image_picker/image_picker.dart';

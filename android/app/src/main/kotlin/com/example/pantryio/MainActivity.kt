@@ -1,4 +1,4 @@
-package com.example.hello_world
+package com.example.pantryio
 
 import android.os.Bundle
 

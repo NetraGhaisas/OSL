@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hello_world/Pages/auth.dart';
-import 'package:hello_world/db/product.dart';
-import 'package:hello_world/product_view_details.dart';
-import 'package:hello_world/productlist.dart';
+import 'package:pantryio/Pages/auth.dart';
+import 'package:pantryio/db/product.dart';
+import 'package:pantryio/product_view_details.dart';
+import 'package:pantryio/productlist.dart';
 import 'db/category.dart';
 import 'registerproduct.dart';
 import 'product_categories.dart';

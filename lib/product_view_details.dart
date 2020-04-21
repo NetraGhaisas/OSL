@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hello_world/Pages/auth.dart';
-// import 'package:hello_world/cart_product.dart';
-import 'package:hello_world/db/cartproduct.dart';
-import 'package:hello_world/db/product.dart';
+import 'package:pantryio/Pages/auth.dart';
+// import 'package:pantryio/cart_product.dart';
+import 'package:pantryio/db/cartproduct.dart';
+import 'package:pantryio/db/product.dart';
 import 'package:intl/intl.dart';
 // import 'placeorder.dart';
 // import 'cart.dart';

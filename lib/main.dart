@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/adminhome.dart';
-// import 'package:hello_world/customer.dart';
-import 'package:hello_world/login_screen.dart';
-import 'package:hello_world/registerproduct.dart';
+import 'package:pantryio/adminhome.dart';
+// import 'package:pantryio/customer.dart';
+import 'package:pantryio/login_screen.dart';
+import 'package:pantryio/registerproduct.dart';
 // import 'shopkeeper.dart';
 //import 'login.dart';
 import 'adminhome.dart';
