@@ -1,6 +1,6 @@
-# E-Retail Using Inventory Management System
+# pantryio
 
-A new Flutter project.
+A grocery inventory management app
 
 ## Getting Started
 
